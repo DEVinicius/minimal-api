@@ -11,7 +11,7 @@ export class ScheduleController {
       return response.json({
         message: "Agendamento Realizado com sucesso",
       });
-    } catch (error) {
+    } catch (error: any) {
       return response.status(400).json({
         error: error.message,
       });

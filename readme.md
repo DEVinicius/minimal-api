@@ -14,10 +14,10 @@ npm run dev
 ```
 
 ## Rotas do projeto
-- Busca de Slots
-Método: GET
+- Busca de Slots<br>
+Método: GET<br>
 localhost:3000/slot?professionalId=1
 
-- Agendamento
-Método: POST
+- Agendamento<br>
+Método: POST<br>
 localhost:3000/schedule

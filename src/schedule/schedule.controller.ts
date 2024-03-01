@@ -2,8 +2,19 @@ import { Request, Response } from "express";
 
 export class ScheduleController {
   public async finish(request: Request, response: Response) {
-    return response.json({
-        message: 'Agendamento Realizado com sucesso'
-    })
+    try {
+      const { slotId, userId } = request.body;
+
+      if (!slotId || !userId)
+        throw new Error("Dados de Slot | Usuario Invalidos");
+
+      return response.json({
+        message: "Agendamento Realizado com sucesso",
+      });
+    } catch (error) {
+      return response.status(400).json({
+        error: error.message,
+      });
+    }
   }
 }

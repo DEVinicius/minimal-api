@@ -13,3 +13,11 @@ Dentro do seu terminal, rode o comando
 npm run dev
 ```
 
+## Rotas do projeto
+- Busca de Slots
+Método: GET
+localhost:3000/slot?professionalId=1
+
+- Agendamento
+Método: POST
+localhost:3000/schedule

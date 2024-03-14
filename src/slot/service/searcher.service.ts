@@ -1,9 +1,31 @@
-import { randomUUID } from 'node:crypto'
+import { randomUUID } from "node:crypto";
+import prisma from "../../../prisma/factory";
 
 class SlotSearcher {
   public async searchByProfessionalId(professionalId: number) {
-    const slots: { id: string; start: Date; end: Date }[] = [];
     let hour = 5;
+
+    const today = new Date();
+    today.setHours(hour, 0, 0, 0);
+
+    const endDay = new Date();
+    endDay.setHours(15, 0, 0, 0);
+
+    const slotsSearched = await prisma.appointment.findMany({
+      where: {
+        professional_id: professionalId,
+        start: {
+          gte: today,
+        },
+        end: {
+          lte: endDay,
+        },
+      },
+    });
+
+    if (slotsSearched.length > 0) return slotsSearched;
+
+    const slots: { id: string; start: Date; end: Date }[] = [];
 
     while (hour < 15) {
       const date = new Date();
@@ -31,7 +53,27 @@ class SlotSearcher {
       slots.push(second_slot);
     }
 
-    return slots;
+    const newSlots = await prisma.appointment.createMany({
+      data: slots.map((s) => {
+        return {
+          end: s.end,
+          start: s.start,
+          professional_id: professionalId,
+        };
+      }),
+    });
+
+    return await prisma.appointment.findMany({
+      where: {
+        professional_id: professionalId,
+        start: {
+          gte: today,
+        },
+        end: {
+          lte: endDay,
+        },
+      },
+    });;
   }
 }
 

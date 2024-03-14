@@ -50,6 +50,17 @@ npm run dev
 Método: GET<br>
 localhost:3000/slot?professionalId=1
 
+- Busca de Agendamento por cliente<br>
+Método: GET<br>
+localhost:3000/slot?userId=1
+
 - Agendamento<br>
 Método: POST<br>
-localhost:3000/schedule
+localhost:3000/schedule<br>
+com o seguinte corpo JSON
+```
+{
+    "slotId": 1,
+    "userId": 1
+}
+```

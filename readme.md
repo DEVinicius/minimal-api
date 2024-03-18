@@ -52,7 +52,7 @@ localhost:3000/slot?professionalId=1
 
 - Busca de Agendamento por cliente<br>
 Método: GET<br>
-localhost:3000/slot?userId=1
+localhost:3000/schedule?userId=1
 
 - Agendamento<br>
 Método: POST<br>
